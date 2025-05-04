@@ -1,7 +1,7 @@
 import { XMLParser } from 'fast-xml-parser';
 import { FeedXmlDocument, feedXmlDocumentShape, productsDataShape } from './model';
 
-export const parseFeedFile = async (fileUrl: string, clientId: string) => {
+export const parseFeedFile = async (fileUrl: string) => {
     const textFile = await fetch(fileUrl);
     const parser = new XMLParser({ removeNSPrefix: true, trimValues: true });
     const jsonObj = parser.parse(await textFile.text()) as FeedXmlDocument;
