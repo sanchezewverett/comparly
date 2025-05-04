@@ -1,22 +1,20 @@
 import { XMLParser } from 'fast-xml-parser';
-import * as fs from 'fs';
-import { feedXmlDataShape } from './model';
+import { FeedXmlDocument, feedXmlDocumentShape, productsDataShape } from './model';
 
-const parseFeedFile = async (fileUrl: string, clientId: string) => {
-    // const response = await fetch(fileUrl)
-    // const textFile = await response.text();
-    const textFile = fs.readFileSync(fileUrl, 'utf8')
-    const parser = new XMLParser();
-    const jsonObj = parser.parse(textFile);
+export const parseFeedFile = async (fileUrl: string, clientId: string) => {
+    const textFile = await fetch(fileUrl);
+    const parser = new XMLParser({ removeNSPrefix: true, trimValues: true });
+    const jsonObj = parser.parse(await textFile.text()) as FeedXmlDocument;
 
-    console.log('data', JSON.stringify(jsonObj, null, 2));
+    console.log('data', jsonObj);
 
-    const validationResult = feedXmlDataShape.safeParse(jsonObj);
-    console.log('validationResult', validationResult);
+    const validationResult = feedXmlDocumentShape.safeParse(jsonObj);
+    if (!validationResult.success) {
+        console.error('Document is not well formed.')
+        return;
+    }
+
+    const productValidationResult = productsDataShape.safeParse(jsonObj.rss.channel.item);
+
+    console.log('productValidationResult', productValidationResult);
 }
-
-(async () => {
-    console.log('start')
-    await parseFeedFile('merchantExample.txt', 'fakeId')
-    console.log('end')
-})()
