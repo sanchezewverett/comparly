@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import { Button } from '@/components/ui/button';
 import { parseFeedFile } from '@/parser/parser';
+import { Button } from '@mui/material';
 
 const ParseButton = () => {
     return (
-        <Button onClick={() => parseFeedFile('../../merchantExample.txt', 'fakeId')}>Parse</Button>
+        <Button onClick={() => parseFeedFile('../../merchantExample.txt')}>Parse</Button>
     );
 };
 
