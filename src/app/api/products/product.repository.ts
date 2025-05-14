@@ -10,7 +10,7 @@ export const getProducts = async ({
   page: number;
   pageSize: number;
   name?: string;
-  category?: string;
+  category?: number;
 }) => {
   const where: Prisma.ProductWhereInput = {};
 
@@ -19,7 +19,7 @@ export const getProducts = async ({
   }
 
   if (category) {
-    where.category = { name: { contains: category, mode: "insensitive" } };
+    where.category = { id: category };
   }
 
   const [products, total] = await Promise.all([
