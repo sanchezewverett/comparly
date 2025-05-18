@@ -3,6 +3,7 @@ import Header from '@/app/Header';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import Footer from '@/app/Footer';
 import { CssBaseline } from '@mui/material';
+import ReactQueryProvider from '@/providers/ReactQueryProvider';
 
 
 export const metadata: Metadata = {
@@ -15,11 +16,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <html lang='en'>
         <body>
         <CssBaseline/>
-        <AppRouterCacheProvider>
-            <Header/>
-            {children}
-            <Footer/>
-        </AppRouterCacheProvider>
+        <ReactQueryProvider>
+            <AppRouterCacheProvider>
+                <Header/>
+                {children}
+                <Footer/>
+            </AppRouterCacheProvider>
+        </ReactQueryProvider>
         </body>
         </html>
     );
