@@ -36,7 +36,7 @@ export const ProductCard = ({ product }: Props) => {
           component="img"
           image={product.imageUrl || DEFAULT_IMAGE}
           alt={product.name}
-          sx={{ height: 160, objectFit: 'cover' }}
+          sx={{ height: 160, objectFit: 'scale-down' }}
         />
 
         <CardContent sx={{ flexGrow: 1 }}>

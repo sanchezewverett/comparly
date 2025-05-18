@@ -2,7 +2,7 @@
 
 import { ProductList } from '@/components/products/ProductList';
 import { useProducts } from '@/hooks/useProducts';
-import { Container, CircularProgress, Box, Pagination, Typography } from '@mui/material';
+import { Container, CircularProgress, Box, Pagination, Typography, Stack } from '@mui/material';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function HomePage() {
@@ -43,14 +43,14 @@ export default function HomePage() {
     return (
       <Container maxWidth="lg" sx={{ py: 4 }}>
         <ProductList products={data.data} />
-        <Box mt={4} display="flex" justifyContent="center">
+        <Stack mt={4} direction="row" justifyContent="center">
           <Pagination
             count={data.totalPages}
             page={data.page}
             onChange={handleChangePage}
             color="primary"
           />
-        </Box>
+        </Stack>
       </Container>
     );
   }
