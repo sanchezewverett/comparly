@@ -6,11 +6,17 @@ export const getProducts = async ({
   pageSize,
   name,
   category,
+  minPrice,
+  maxPrice,
+  brand,
 }: {
   page: number;
   pageSize: number;
   name?: string;
   category?: number;
+  minPrice?: number;
+  maxPrice?: number;
+  brand?: string;
 }) => {
   const where: Prisma.ProductWhereInput = {};
 
@@ -20,6 +26,18 @@ export const getProducts = async ({
 
   if (category) {
     where.category = { id: category };
+  }
+
+  if (minPrice) {
+    where.price = { gte: minPrice };
+  }
+
+  if (maxPrice) {
+    where.price = { lte: maxPrice };
+  }
+
+  if (brand) {
+    where.brand = { contains: brand, mode: "insensitive" };
   }
 
   const [products, total] = await Promise.all([

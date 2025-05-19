@@ -1,6 +1,6 @@
 'use client';
 
-import { Product } from '@/types/api/products.types';
+import { Product } from '@/types/api/product.types';
 import {
   Card,
   CardContent,

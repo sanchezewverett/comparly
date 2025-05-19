@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { Product } from "@/types/api/products.types";
+import { Product } from "@/types/api/product.types";
 
 async function fetchProduct(id: string): Promise<Product> {
   const res = await fetch(`/api/products/${id}`);
