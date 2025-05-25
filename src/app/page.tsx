@@ -119,7 +119,7 @@ export default function HomePage() {
           </Button>
         </Box>
 
-        <Stack>
+        <Stack width="100%">
           {isLoading ? (
             <Stack  justifyContent="center" mt={4}>
               <CircularProgress />

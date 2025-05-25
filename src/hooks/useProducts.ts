@@ -34,18 +34,11 @@ async function fetchProducts({
   return res.json();
 }
 
-export function useProducts({
-  page = 1,
-  category,
-  name,
-  brand,
-  minPrice,
-  maxPrice,
-}: UseProductsProps) {
+export function useProducts(props: UseProductsProps) {
+  //TODO: talk about pagination from UI perspective
   return useQuery<ProductsResponse, Error>({
-    queryKey: ["products", page, category, name, brand, minPrice, maxPrice],
-    queryFn: () =>
-      fetchProducts({ page, category, name, brand, minPrice, maxPrice }),
+    queryKey: ["products", props],
+    queryFn: () => fetchProducts(props),
     staleTime: 1000 * 60,
   });
 }
