@@ -6,8 +6,19 @@ export const getPaginatedProducts = async ({
   pageSize,
   name,
   category,
+  minPrice,
+  maxPrice,
+  brand,
 }: GetProductsQuery) => {
-  return getProducts({ page, pageSize, name, category });
+  return getProducts({
+    page,
+    pageSize,
+    name,
+    category,
+    minPrice,
+    maxPrice,
+    brand,
+  });
 };
 
 export const fetchProductDetails = async (id: number) => {
