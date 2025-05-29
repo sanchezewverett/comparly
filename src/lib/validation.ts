@@ -14,11 +14,15 @@ type InferredInput<S extends ValidationSchemas> = {
 
 export function withValidation<S extends ValidationSchemas>(
   schemas: S,
-  handler: (input: InferredInput<S>, req: Request) => Promise<Response>
+  handler: (
+    input: InferredInput<S>,
+    req: Request,
+    context: { params: Promise<unknown> }
+  ) => Promise<Response>
 ) {
   return async function (
     req: Request,
-    context: { params?: unknown } = {}
+    context: { params: Promise<unknown> }
   ): Promise<Response> {
     const errors: Record<string, unknown> = {};
     const result: Partial<InferredInput<S>> = {};
@@ -65,6 +69,6 @@ export function withValidation<S extends ValidationSchemas>(
       );
     }
 
-    return handler(result as InferredInput<S>, req);
+    return handler(result as InferredInput<S>, req, context);
   };
 }
