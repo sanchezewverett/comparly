@@ -4,6 +4,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import Footer from '@/app/Footer';
 import { CssBaseline } from '@mui/material';
 import ReactQueryProvider from '@/providers/ReactQueryProvider';
+import { Suspense } from 'react';
 
 
 export const metadata: Metadata = {
@@ -19,7 +20,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <ReactQueryProvider>
             <AppRouterCacheProvider>
                 <Header/>
-                {children}
+                    <Suspense fallback={<div>Ładowanie...</div>}>
+                        {children}
+                    </Suspense>
                 <Footer/>
             </AppRouterCacheProvider>
         </ReactQueryProvider>
