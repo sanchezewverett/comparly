@@ -17,6 +17,7 @@ const Header = () => {
             justifyContent='center'
             position='sticky'
             top='0'
+            zIndex={1000}
         >
             <AppLogo/>
             <Stack

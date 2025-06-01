@@ -15,14 +15,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
     return (
         <html lang='en'>
-        <body>
+        <body style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <CssBaseline/>
         <ReactQueryProvider>
             <AppRouterCacheProvider>
                 <Header/>
-                    <Suspense fallback={<div>Ładowanie...</div>}>
-                        {children}
-                    </Suspense>
+                <Suspense fallback={<div>Ładowanie...</div>}>
+                    {children}
+                </Suspense>
                 <Footer/>
             </AppRouterCacheProvider>
         </ReactQueryProvider>

@@ -1,14 +1,15 @@
 import React from 'react';
 import { grey } from '@mui/material/colors';
-import { Container, Divider, Link, Stack } from '@mui/material';
+import { Divider, Link, Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import EmailIcon from '@mui/icons-material/Email';
 import MapIcon from '@mui/icons-material/Map';
 
 const Footer = () => {
     return (
-        <Container
-            maxWidth={false}
+        <Stack
+            direction='row'
+            justifyContent='center'
             sx={{ borderTop: `2px solid ${grey[300]}` }}
         >
             <Stack
@@ -16,15 +17,16 @@ const Footer = () => {
                 paddingInline={4}
                 paddingBlock={3}
                 spacing={2}
+                flexGrow={1}
+                maxWidth='xl'
                 divider={<Divider orientation='horizontal'/>}
             >
                 <Stack
                     direction='row'
                     spacing={15}
-                    maxWidth='lg'
                 >
                     <Stack
-                        flexBasis='33.33%'
+                        flexBasis='35%'
                         spacing={2}
                     >
                         <Typography fontSize={18} fontWeight={600}>
@@ -35,7 +37,7 @@ const Footer = () => {
                         </Typography>
                     </Stack>
                     <Stack
-                        flexBasis='33.33%'
+                        flexBasis='35%'
                         spacing={2}
                     >
                         <Typography fontSize={18} fontWeight={600}>
@@ -70,7 +72,7 @@ const Footer = () => {
                         </Stack>
                     </Stack>
                     <Stack
-                        flexBasis='33.33%'
+                        flexBasis='30%'
                         spacing={2}
                     >
                         <Typography fontSize={18} fontWeight={600}>
@@ -102,11 +104,11 @@ const Footer = () => {
                         </Stack>
                     </Stack>
                 </Stack>
-                <Typography variant='subtitle2'>
+                <Typography variant='subtitle2' alignSelf='start'>
                     © 2025 Comparly by Movement.
                 </Typography>
             </Stack>
-        </Container>
+        </Stack>
 
     );
 };
