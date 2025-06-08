@@ -71,7 +71,7 @@ const CategoriesNestingMenu: FC<Props> = ({ handleCategoryChange, defaultValue }
     useEffect(() => {
         if (defaultValue) {
             const defaultPath = findCategoryPathById(categories, Number(defaultValue))
-            setPath(defaultPath);
+            setPath(defaultPath ?? []);
         }
     }, [])
 
