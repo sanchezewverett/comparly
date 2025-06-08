@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense, FC } from 'react';
+import React, { FC, Suspense } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';

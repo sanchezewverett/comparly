@@ -59,13 +59,12 @@ const FilterList: FC<Props> = ({ onFilterConfirm }) => {
         }));
     };
 
-    const handleCategoryChange = (categoryId: number) => {
+    const handleCategoryChange = (categoryId: number | undefined) => {
         setFormState((prev) => ({
             ...prev,
-            ['category']: String(categoryId),
+            category: categoryId ? categoryId.toString() : '',
         }));
     }
-
 
     return (
         <Box>

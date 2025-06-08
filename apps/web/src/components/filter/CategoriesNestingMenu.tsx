@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 type Props = {
-    handleCategoryChange: (value: number) => void;
+    handleCategoryChange: (value: number | undefined) => void;
     defaultValue?: string
 }
 
@@ -70,10 +70,8 @@ const CategoriesNestingMenu: FC<Props> = ({ handleCategoryChange, defaultValue }
 
     useEffect(() => {
         if (defaultValue) {
-            const defaultPath = findCategoryPathById(categories, Number(defaultValue));
-            if (defaultPath) {
-                setPath(defaultPath);
-            }
+            const defaultPath = findCategoryPathById(categories, Number(defaultValue))
+            setPath(defaultPath ?? []);
         }
     }, [])
 
