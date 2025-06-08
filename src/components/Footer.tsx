@@ -1,11 +1,17 @@
+'use client';
+
 import React from 'react';
 import { grey } from '@mui/material/colors';
 import { Divider, Link, Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import EmailIcon from '@mui/icons-material/Email';
 import MapIcon from '@mui/icons-material/Map';
+import { useMediaQuery, useTheme } from '@mui/system';
 
 const Footer = () => {
+    const theme = useTheme();
+    const isUpMedium = useMediaQuery(theme.breakpoints.up('sm'));
+
     return (
         <Stack
             direction='row'
@@ -14,7 +20,7 @@ const Footer = () => {
         >
             <Stack
                 component='footer'
-                paddingInline={4}
+                paddingInline={3}
                 paddingBlock={3}
                 spacing={2}
                 flexGrow={1}
@@ -22,8 +28,8 @@ const Footer = () => {
                 divider={<Divider orientation='horizontal'/>}
             >
                 <Stack
-                    direction='row'
-                    spacing={15}
+                    direction={isUpMedium ? 'row' : 'column'}
+                    spacing={4}
                 >
                     <Stack
                         flexBasis='35%'
@@ -33,7 +39,8 @@ const Footer = () => {
                             Comparly
                         </Typography>
                         <Typography variant='body2'>
-                            Nie jesteśmy najtańsi na rynku… bo niczego nie sprzedajemy. Ale pokażemy Ci, kto jest!
+                            Nie jesteśmy najtańsi na rynku… bo niczego nie sprzedajemy.<br/> Ale pokażemy Ci, kto
+                            jest!
                         </Typography>
                     </Stack>
                     <Stack
