@@ -59,10 +59,10 @@ const FilterList: FC<Props> = ({ onFilterConfirm }) => {
         }));
     };
 
-    const handleCategoryChange = (categoryId: number) => {
+    const handleCategoryChange = (categoryId: number | undefined) => {
         setFormState((prev) => ({
             ...prev,
-            ['category']: categoryId.toString(),
+            ['category']: categoryId ? categoryId.toString() : '',
         }));
     }
 
