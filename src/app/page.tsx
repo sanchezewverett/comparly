@@ -46,7 +46,7 @@ export default function HomePage() {
                         </Stack>
                     ) : data ? (
                         <>
-                            <ProductList products={data}/>
+                            <ProductList products={data.data}/>
                             <Stack mt={4} direction='row' justifyContent='center'>
                                 <Pagination
                                     count={data?.totalPages}
