@@ -65,8 +65,6 @@ const CategoriesNestingMenu: FC<Props> = ({ handleCategoryChange, defaultValue }
     const handleBack = () => {
         const parentCategoryId = path.slice(0, -1);
         setPath(parentCategoryId);
-        const a = (parentCategoryId[parentCategoryId.length - 1]);
-        console.log('a', a)
         handleCategoryChange(parentCategoryId[parentCategoryId.length - 1]);
     };
 
