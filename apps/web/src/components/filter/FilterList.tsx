@@ -62,7 +62,7 @@ const FilterList: FC<Props> = ({ onFilterConfirm }) => {
     const handleCategoryChange = (categoryId: number) => {
         setFormState((prev) => ({
             ...prev,
-            ['category']: categoryId,
+            ['category']: String(categoryId),
         }));
     }
 

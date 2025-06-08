@@ -8,6 +8,7 @@ export const getProducts = async ({
   minPrice,
   maxPrice,
   brand,
+  category,
 }: {
   page: number;
   pageSize: number;
@@ -34,6 +35,12 @@ export const getProducts = async ({
   if (brand) {
     where.product = {
       brand: { contains: brand, mode: "insensitive" },
+    };
+  }
+
+  if (category) {
+    where.product = {
+      googleCategoryId: category,
     };
   }
 

@@ -70,8 +70,10 @@ const CategoriesNestingMenu: FC<Props> = ({ handleCategoryChange, defaultValue }
 
     useEffect(() => {
         if (defaultValue) {
-            const defaultPath = findCategoryPathById(categories, Number(defaultValue))
-            setPath(defaultPath);
+            const defaultPath = findCategoryPathById(categories, Number(defaultValue));
+            if (defaultPath) {
+                setPath(defaultPath);
+            }
         }
     }, [])
 
