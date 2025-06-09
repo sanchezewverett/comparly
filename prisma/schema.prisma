@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -14,37 +15,42 @@ datasource db {
 }
 
 model Client {
-  id        Int       @id @default(autoincrement())
-  name      String
-  feedUrl   String?
-  email     String
-  active    Boolean   @default(true)
-  createdAt DateTime  @default(now())
-  products  Product[]
+  id                  Int              @id @default(autoincrement())
+  name                String
+  feedUrl             String?
+  email               String
+  active              Boolean          @default(true)
+  createdAt           DateTime         @default(now())
+  lastFeedProcessedAt DateTime?
+
+  productDetails            ProductDetails[]
 }
 
 model Product {
-  id           Int       @id @default(autoincrement())
-  client       Client    @relation(fields: [clientId], references: [id])
-  clientId     Int
-  externalId   String
-  name         String
-  category     Category @relation(fields: [categoryId], references: [id])
-  categoryId   Int
-  description  String
-  price        Decimal   @db.Decimal(10, 2)
-  currency     String   @db.VarChar(3)
-  brand        String?
-  imageUrl     String?
-  productUrl   String
-  availability String?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  id               Int      @id @default(autoincrement())
+  googleCategoryId Int?
+  brand            String?
+  externalId       String   @unique()
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  productDetails ProductDetails[]
 }
 
-model Category {
-  id        Int       @id @default(autoincrement())
-  name      String
-  createdAt DateTime  @default(now())
-  products  Product[]
+model ProductDetails {
+  id               Int     @id @default(autoincrement())
+  name             String
+  internalCategory String
+  description      String
+  price            Decimal @db.Decimal(10, 2)
+  currency         String  @db.VarChar(3)
+  productUrl       String
+  imageUrl         String?
+  availability     String?
+  client           Client  @relation(fields: [clientId], references: [id])
+  clientId         Int
+  productId        Int
+  product          Product @relation(fields: [productId], references: [id])
+  
+  @@unique(productId)
 }

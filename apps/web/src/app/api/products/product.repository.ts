@@ -5,10 +5,10 @@ export const getProducts = async ({
   page,
   pageSize,
   name,
-  category,
   minPrice,
   maxPrice,
   brand,
+  category,
 }: {
   page: number;
   pageSize: number;
@@ -18,14 +18,10 @@ export const getProducts = async ({
   maxPrice?: number;
   brand?: string;
 }) => {
-  const where: Prisma.ProductWhereInput = {};
+  const where: Prisma.ProductDetailsWhereInput = {};
 
   if (name) {
     where.name = { contains: name, mode: "insensitive" };
-  }
-
-  if (category) {
-    where.category = { id: category };
   }
 
   if (minPrice) {
@@ -37,17 +33,25 @@ export const getProducts = async ({
   }
 
   if (brand) {
-    where.brand = { contains: brand, mode: "insensitive" };
+    where.product = {
+      brand: { contains: brand, mode: "insensitive" },
+    };
+  }
+
+  if (category) {
+    where.product = {
+      googleCategoryId: category,
+    };
   }
 
   const [products, total] = await Promise.all([
-    prisma.product.findMany({
+    prisma.productDetails.findMany({
       where,
       skip: (page - 1) * pageSize,
       take: pageSize,
-      include: { category: true },
+      include: { product: true },
     }),
-    prisma.product.count({ where }),
+    prisma.productDetails.count({ where }),
   ]);
 
   return {
@@ -60,8 +64,8 @@ export const getProducts = async ({
 };
 
 export const getProductById = async (id: number) => {
-  return prisma.product.findUnique({
+  return prisma.productDetails.findUnique({
     where: { id },
-    include: { category: true, client: true },
+    include: { product: true, client: true },
   });
 };

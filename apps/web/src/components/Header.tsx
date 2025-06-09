@@ -1,0 +1,52 @@
+'use client';
+
+import React from 'react';
+import { Button, IconButton, Stack, TextField } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search'
+import AppLogo from '@/components/AppLogo';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import { useMediaQuery, useTheme } from '@mui/system';
+
+const Header = () => {
+    const theme = useTheme();
+    const isUpMedium = useMediaQuery(theme.breakpoints.up('md'));
+    const isUpSmall = useMediaQuery(theme.breakpoints.up('sm'));
+
+    return (
+        <Stack
+            component='header'
+            bgcolor='white'
+            paddingInline={3}
+            paddingBlock={2}
+            boxShadow={1}
+            flexDirection={isUpSmall ? 'row' : 'column'}
+            alignItems='center'
+            justifyContent='center'
+            position='sticky'
+            top='0'
+            zIndex={1000}
+            spacing={isUpSmall ? 0 : 2}
+        >
+            <AppLogo/>
+            <Stack
+                direction='row'
+                justifyContent={isUpSmall ? 'flex-end' : 'center'}
+                spacing={2}
+                maxWidth='lg'
+                width='100%'
+            >
+                <TextField
+                    label='Wyszukaj produkt'
+                    size='small'
+                    variant='outlined'
+                    slotProps={{ input: { endAdornment: <SearchIcon/> } }}/>
+                {isUpMedium ?
+                    <Button startIcon={<AddBusinessIcon/>} variant='contained'>Dodaj swój sklep</Button>
+                    : <IconButton color='primary'><AddBusinessIcon/></IconButton>
+                }
+            </Stack>
+        </Stack>
+    );
+};
+
+export default Header;
