@@ -1,9 +1,7 @@
 {
-
   "name": "web",
   "private": true,
   "scripts": {
-    "postinstall": "npx prisma generate",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start -p 8080",
@@ -17,7 +15,7 @@
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
     "@mui/material-nextjs": "^7.0.2",
-    "@prisma/client": "^6.6.0",
+    "@prisma/client": "^6.9.0",
     "@tanstack/react-query": "^5.76.1",
     "constructs": "^10.4.2",
     "fast-xml-parser": "^5.2.1",
