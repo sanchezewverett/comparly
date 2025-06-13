@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "npx prisma generate"
+    "postinstall": "npx prisma generate",
+    "lambda-deploy:dev": "npm run deploy:dev --workspace=cdk",
+    "lambda-deploy:prod": "npm run deploy:prod --workspace=cdk",
+    "tf:dev": "cd infrastructure && terraform workspace select dev && terraform apply -var-file=dev.tfvars",
+    "tf:prod": "cd infrastructure && terraform apply -var-file=prod.tfvars"
   },
   "devDependencies": {
     "prisma": "^6.9.0",
