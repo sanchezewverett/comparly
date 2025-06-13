@@ -9,7 +9,10 @@
     "build": "rm -rf dist && tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "deploy:dev": "npm run build && npx cdk deploy --context env=dev",
+    "deploy:prod": "npm run build && npx cdk deploy --context env=prod",
+    "synth": "npx cdk synth"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.149",
@@ -23,6 +26,7 @@
   "dependencies": {
     "@aws-lambda-powertools/logger": "^2.21.0",
     "aws-cdk-lib": "2.198.0",
-    "constructs": "^10.0.0"
+    "constructs": "^10.0.0",
+    "yn": "^3.1.1"
   }
 }
