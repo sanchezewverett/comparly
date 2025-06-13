@@ -16,9 +16,15 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
 
-      - name: Install dependencies
+      - name: Install dependencies (root)
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Install dependencies (web)
         run: |
           cd apps/web
           npm ci
@@ -27,6 +33,11 @@ jobs:
         run: |
           cd apps/web
           npm run build
+
+      - name: Zip app for Elastic Beanstalk
+        run: |
+          cd apps/web
+          zip -r ../web-app.zip . -x '*.git*' 'test/*'
 
       - name: Zip app for Elastic Beanstalk
         run: |
