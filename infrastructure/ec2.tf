@@ -125,4 +125,10 @@ resource "aws_elastic_beanstalk_environment" "env" {
     name      = "EnvironmentType"
     value     = "SingleInstance"
   }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "DATABASE_URL"
+    value     = var.database_url
+  }
 }

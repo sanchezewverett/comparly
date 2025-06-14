@@ -14,3 +14,9 @@ variable "ec2_key_name" {
   description = "SSH key to EC2"
   type        = string
 }
+
+variable "database_url" {
+  description = "Database connection string"
+  type        = string
+  sensitive   = true
+}
