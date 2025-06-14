@@ -18,12 +18,6 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install dependencies (root)
-        run: npm ci
-
-      - name: Generate Prisma client
-        run: npx prisma generate
-
       - name: Copy prisma to web app
         run: cp -r prisma apps/web
 
