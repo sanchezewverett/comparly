@@ -24,13 +24,18 @@ jobs:
       - name: Generate Prisma client
         run: npx prisma generate
 
-      - name: Install dependencies (root)
-        run: cp -r node_modules apps/web
+      - name: Copy prisma to web app
+        run: cp -r prisma apps/web
 
       - name: Install dependencies (web)
         run: |
           cd apps/web
-          npm ci
+          npm install
+
+      - name: Create prisma client
+        run: |
+          cd apps/web
+          npx prisma generate
 
       - name: Build app
         run: |
