@@ -39,7 +39,7 @@ jobs:
       - name: Zip app for Elastic Beanstalk
         run: |
           cd apps/web
-          zip -r ../web-app.zip . -x '*.git*' 'test/*'
+          zip -r ../web-app.zip . -x '*.git*' 'node_modules/*' 'test/*'
 
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
