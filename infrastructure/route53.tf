@@ -8,5 +8,5 @@ resource "aws_route53_record" "dev_comparly" {
   name    = "comparly-dev.themovement.agency"
   type    = "CNAME"
   ttl     = 300
-  records = [aws_elastic_beanstalk_environment.env.endpoint_url]
+  records = [aws_elastic_beanstalk_environment.env.cname]
 }
