@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "db:generate": "npm prisma generate",
+    "db:generate": "npx prisma generate",
     "db:migrate": "npx prisma migrate deploy",
     "lambda-deploy:dev": "npm run deploy:dev --workspace=cdk",
     "lambda-deploy:prod": "npm run deploy:prod --workspace=cdk",
