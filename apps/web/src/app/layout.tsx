@@ -3,6 +3,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { CssBaseline } from '@mui/material';
 import ReactQueryProvider from '@/providers/ReactQueryProvider';
 import App from '@/app/App';
+import React, { Suspense } from 'react';
 
 export const metadata: Metadata = {
     title: 'Create Next App',
@@ -17,9 +18,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <CssBaseline/>
         <ReactQueryProvider>
             <AppRouterCacheProvider>
-                <App>
-                    {children}
-                </App>
+                <Suspense fallback={null}>
+                    <App>
+                        {children}
+                    </App>
+                </Suspense>
             </AppRouterCacheProvider>
         </ReactQueryProvider>
         </body>

@@ -7,6 +7,9 @@ import Typography from '@mui/material/Typography';
 import EmailIcon from '@mui/icons-material/Email';
 import MapIcon from '@mui/icons-material/Map';
 import { useMediaQuery, useTheme } from '@mui/system';
+import EmailButton from '@/components/EmailButton';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import { GENERAL_QUESTION_URL, LICENSE_QUESTION_URL } from '@/constant';
 
 const Footer = () => {
     const theme = useTheme();
@@ -63,7 +66,8 @@ const Footer = () => {
                                 Home
                             </Link>
                             <Link
-                                component='button'
+                                href={LICENSE_QUESTION_URL}
+                                target='_blank'
                                 variant='body2'
                                 color='textPrimary'
                                 underline='hover'>
@@ -94,10 +98,23 @@ const Footer = () => {
                                 direction='row'
                                 spacing={1}
                             >
+                                <QuestionAnswerIcon fontSize='small'/>
+                                <Link
+                                    target='_blank'
+                                    href={GENERAL_QUESTION_URL}
+                                    variant='body2'
+                                    color='textPrimary'
+                                    underline='hover'
+                                >
+                                    Masz pytanie - napisz tutaj
+                                </Link>
+                            </Stack>
+                            <Stack
+                                direction='row'
+                                spacing={1}
+                            >
                                 <EmailIcon fontSize='small'/>
-                                <Typography variant='body2'>
-                                    contact@movementagency.io
-                                </Typography>
+                                <EmailButton/>
                             </Stack>
                             <Stack
                                 direction='row'
