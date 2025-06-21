@@ -6,6 +6,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import AppLogo from '@/components/AppLogo';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import { useMediaQuery, useTheme } from '@mui/system';
+import { LICENSE_QUESTION_URL } from '@/constant';
 
 const Header = () => {
     const theme = useTheme();
@@ -41,8 +42,20 @@ const Header = () => {
                     variant='outlined'
                     slotProps={{ input: { endAdornment: <SearchIcon/> } }}/>
                 {isUpMedium ?
-                    <Button startIcon={<AddBusinessIcon/>} variant='contained'>Dodaj swój sklep</Button>
-                    : <IconButton color='primary'><AddBusinessIcon/></IconButton>
+                    <Button
+                        target='_blank'
+                        href={LICENSE_QUESTION_URL}
+                        startIcon={<AddBusinessIcon/>}
+                        variant='contained'>
+                        Dodaj swój sklep
+                    </Button>
+                    : <IconButton
+                        color='primary'
+                        target='_blank'
+                        href={LICENSE_QUESTION_URL}
+                    >
+                        <AddBusinessIcon/>
+                    </IconButton>
                 }
             </Stack>
         </Stack>
