@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
+import { ReadonlyURLSearchParams, useRouter, useSearchParams } from 'next/navigation';
 import {
     Container,
     CircularProgress,
@@ -15,13 +15,23 @@ import FilterList from '@/components/filter/FilterList';
 import { FilterFromState } from '@/app/model';
 import { useMediaQuery, useTheme } from '@mui/system';
 
+const parseSearchParams = (searchParams: ReadonlyURLSearchParams) => (
+    {
+        name: searchParams.get('name') || '',
+        category: searchParams.get('category') || '',
+        brand: searchParams.get('brand') || '',
+        minPrice: searchParams.get('minPrice') || '',
+        maxPrice: searchParams.get('maxPrice') || '',
+        query: searchParams.get('query') || '',
+    }
+)
 
 export default function HomePage() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const theme = useTheme();
     const isUpMedium = useMediaQuery(theme.breakpoints.up('md'));
-    const [filtersState, setFiltersState] = useState<FilterFromState>({});
+    const [filtersState, setFiltersState] = useState<FilterFromState>(() => parseSearchParams(searchParams));
 
     const page = parseInt(searchParams.get('page') || '1', 10);
     const { data, isLoading } = useProducts({
@@ -34,6 +44,10 @@ export default function HomePage() {
     const handleChangePage = (_: React.ChangeEvent<unknown>, value: number) => {
         router.push(`/?page=${value}`);
     };
+
+    useEffect(() => {
+        setFiltersState(() => parseSearchParams(searchParams))
+    }, [searchParams])
 
     return (
         <Container maxWidth='xl' sx={{ py: 4, flexGrow: 1 }}>
