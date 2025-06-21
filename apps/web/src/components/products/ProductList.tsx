@@ -1,7 +1,7 @@
 'use client';
 
 import { Grid } from '@mui/material';
-import { Product } from '../../types/api/product.types';
+import { Product } from '@/types/api/product.types';
 import { ProductCard } from './ProductCard';
 
 type Props = {
