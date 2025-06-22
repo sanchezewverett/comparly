@@ -1,0 +1,17 @@
+{
+  "name": "product-parser",
+  "private": true,
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "start": "node dist/src/index.js"
+  },
+
+  "devDependencies": {
+    "@types/node": "22.7.9",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.9.0",
+    "zod": "^3.24.3"
+  }
+}

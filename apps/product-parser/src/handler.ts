@@ -1,9 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { parseFeedFile } from "./parser";
-import { Logger } from "@aws-lambda-powertools/logger";
 
 const prisma = new PrismaClient();
-const logger = new Logger({ serviceName: "product-parser" });
 const twelveHoursAgo = new Date(Date.now() - 12 * 60 * 60 * 1000);
 
 export const handler = async () => {
@@ -26,7 +24,7 @@ export const handler = async () => {
     });
 
     if (clients.length === 0) {
-      logger.info("No active clients to process");
+      console.info("No active clients to process");
       return;
     }
 
@@ -151,13 +149,13 @@ export const handler = async () => {
       });
 
       Object.entries(grouped).forEach(([clientId, errs]) => {
-        logger.error(
+        console.error(
           `Errors for client ${clientId}: ${errs.length} products failed.`,
           { errors: errs }
         );
       });
     } else {
-      logger.info(`Import finished. Processed products: ${totalProducts}`);
+      console.info(`Import finished. Processed products: ${totalProducts}`);
     }
   }
 };
