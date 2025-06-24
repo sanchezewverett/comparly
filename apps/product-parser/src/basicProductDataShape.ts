@@ -7,7 +7,7 @@ export const structuredTitleDescription = (message: string) =>
   });
 
 export const basicProductDataShape = z.object({
-  id: z.string().max(50, "Id must be at most 50 characters."),
+  id: z.union([z.string(), z.number()]).transform((val) => String(val)),
   title: z
     .string()
     .nonempty("Title must be at least 1 character.")

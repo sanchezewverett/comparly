@@ -52,13 +52,13 @@ export const handler = async () => {
           products.data.map(async (product) => {
             try {
               const internalProduct = await prisma.product.upsert({
-                where: { externalId: product.id },
+                where: { externalId: product.gtin || product.mpn },
                 update: {
                   googleCategoryId: product.googleProductCategory
                     ? Number(product.googleProductCategory)
                     : undefined,
                   brand: product.brand,
-                  externalId: product.id,
+                  externalId: product.gtin || product.mpn,
                   updatedAt: new Date(),
                 },
                 create: {
@@ -66,7 +66,7 @@ export const handler = async () => {
                     ? Number(product.googleProductCategory)
                     : undefined,
                   brand: product.brand,
-                  externalId: product.id,
+                  externalId: product.gtin || product.mpn!,
                   createdAt: new Date(),
                   updatedAt: new Date(),
                 },
