@@ -34,7 +34,7 @@ export const priceAndAvailabilityTransform = <
   return {
     ...rest,
     availabilityDate: availability_date,
-    price: priceValue,
+    price: Math.round(priceValue * 100),
     currency,
   };
 };

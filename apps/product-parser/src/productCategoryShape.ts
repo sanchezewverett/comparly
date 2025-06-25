@@ -2,7 +2,7 @@ import { z } from "zod";
 import categoriesIdentifiers from "./categories";
 
 export const productCategoryShape = z.object({
-  google_product_category: z.enum(categoriesIdentifiers).optional(), //TODO categories as eng keys
+  google_product_category: z.string().optional(), //TODO categories as eng keys
   product_type: z
     .string()
     .max(750, "Product type must have at most 750 characters."),
