@@ -20,5 +20,8 @@ export const parseFeedFile = async (fileUrl: string) => {
         jsonObj.rss.channel.item,
     );
 
+    console.log('productValidationResult', JSON.stringify(productValidationResult.error?.errors, null, 2));
+
+
     return productValidationResult;
 };

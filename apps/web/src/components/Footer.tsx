@@ -5,11 +5,13 @@ import { grey } from '@mui/material/colors';
 import { Divider, Link, Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import EmailIcon from '@mui/icons-material/Email';
-import MapIcon from '@mui/icons-material/Map';
 import { useMediaQuery, useTheme } from '@mui/system';
-import EmailButton from '@/components/EmailButton';
-import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import HiddenButton from '@/components/HiddenButton';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { GENERAL_QUESTION_URL, LICENSE_QUESTION_URL } from '@/constant';
+import BusinessIcon from '@mui/icons-material/Business';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import SignpostIcon from '@mui/icons-material/Signpost';
 
 const Footer = () => {
     const theme = useTheme();
@@ -80,6 +82,15 @@ const Footer = () => {
                                 underline='hover'>
                                 O nas
                             </Link>
+                            <Link
+                                target='_blank'
+                                href={GENERAL_QUESTION_URL}
+                                variant='body2'
+                                color='textPrimary'
+                                underline='hover'
+                            >
+                                Masz pytanie - napisz tutaj
+                            </Link>
                         </Stack>
                     </Stack>
                     <Stack
@@ -98,31 +109,41 @@ const Footer = () => {
                                 direction='row'
                                 spacing={1}
                             >
-                                <QuestionAnswerIcon fontSize='small'/>
-                                <Link
-                                    target='_blank'
-                                    href={GENERAL_QUESTION_URL}
-                                    variant='body2'
-                                    color='textPrimary'
-                                    underline='hover'
-                                >
-                                    Masz pytanie - napisz tutaj
-                                </Link>
-                            </Stack>
-                            <Stack
-                                direction='row'
-                                spacing={1}
-                            >
                                 <EmailIcon fontSize='small'/>
-                                <EmailButton/>
+                                <HiddenButton value='comparly@themovement.agency' showText='Pokaż email'/>
                             </Stack>
                             <Stack
                                 direction='row'
                                 spacing={1}
                             >
-                                <MapIcon fontSize='small'/>
+                                <LocalPhoneIcon fontSize='small'/>
+                                <HiddenButton value='+48 660 870 296' showText='Pokaż numer'/>
+                            </Stack>
+                            <Stack
+                                direction='row'
+                                spacing={1}
+                            >
+                                <BusinessIcon fontSize='small'/>
                                 <Typography variant='body2'>
-                                    Warsaw, Poland
+                                    Movement Digital
+                                </Typography>
+                            </Stack>
+                            <Stack
+                                direction='row'
+                                spacing={1}
+                            >
+                                <SignpostIcon fontSize='small'/>
+                                <Typography variant='body2'>
+                                    ul. Radosna 33
+                                </Typography>
+                            </Stack>
+                            <Stack
+                                direction='row'
+                                spacing={1}
+                            >
+                                <LocationCityIcon fontSize='small'/>
+                                <Typography variant='body2'>
+                                    16-002, Nowe Aleksandrowo
                                 </Typography>
                             </Stack>
                         </Stack>

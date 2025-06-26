@@ -1,25 +1,29 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import Typography from '@mui/material/Typography';
 
+type Props = {
+    value: string
+    showText: string
+}
 
-const EmailButton = () => {
+const HiddenButton: FC<Props> = ({ value, showText }) => {
     const [showEmail, setShowEmail] = useState(false);
 
     return (
         <>
             {showEmail ?
                 <Typography variant='body2'>
-                    contact@movementagency.io
+                    {value}
                 </Typography>
                 : <Typography
                     sx={{ cursor: 'pointer' }}
                     variant='body2'
                     onClick={() => setShowEmail(true)}
                 >
-                    Pokaż email
+                    {showText}
                 </Typography>}
         </>
     );
 };
 
-export default EmailButton;
+export default HiddenButton;
