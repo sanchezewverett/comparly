@@ -2,7 +2,7 @@
 
 import { Product } from '@/types/api/product.types';
 import { Card, CardContent, Typography, CardMedia, Box, Button } from '@mui/material';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   product: Product;
@@ -11,8 +11,10 @@ type Props = {
 const DEFAULT_IMAGE = './placeholder.png';
 
 export const ProductCard = ({ product }: Props) => {
+  const router = useRouter();
+
   return (
-    <Link href={`/products/${product.id}`} style={{ textDecoration: 'none' }}>
+    <Box onClick={() => router.push(`/products/${product.id}`)} sx={{ cursor: 'pointer' }}>
       <Card
         variant="outlined"
         sx={{
@@ -69,6 +71,6 @@ export const ProductCard = ({ product }: Props) => {
           </Button>
         </Box>
       </Card>
-    </Link>
+    </Box>
   );
 };
