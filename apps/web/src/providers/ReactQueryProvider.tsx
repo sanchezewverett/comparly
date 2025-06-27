@@ -9,9 +9,5 @@ export default function ReactQueryProvider({ children }: { children: ReactNode }
     queryClientRef.current = new QueryClient();
   }
 
-  return (
-    <QueryClientProvider client={queryClientRef.current}>
-      {children}
-    </QueryClientProvider>
-  );
+  return <QueryClientProvider client={queryClientRef.current}>{children}</QueryClientProvider>;
 }

@@ -1,9 +1,5 @@
-import { XMLParser } from "fast-xml-parser";
-import {
-  FeedXmlDocument,
-  feedXmlDocumentShape,
-  productsDataShape,
-} from "./model";
+import { XMLParser } from 'fast-xml-parser';
+import { FeedXmlDocument, feedXmlDocumentShape, productsDataShape } from './model';
 
 export const parseFeedFile = async (fileUrl: string) => {
   const textFile = await fetch(fileUrl);
@@ -12,12 +8,15 @@ export const parseFeedFile = async (fileUrl: string) => {
 
   const validationResult = feedXmlDocumentShape.safeParse(jsonObj);
   if (!validationResult.success) {
-    console.error("Document is not well formed.");
+    console.error('Document is not well formed.');
     return;
   }
 
-  const productValidationResult = productsDataShape.safeParse(
-    jsonObj.rss.channel.item
+  const productValidationResult = productsDataShape.safeParse(jsonObj.rss.channel.item);
+
+  console.log(
+    'productValidationResult',
+    JSON.stringify(productValidationResult.error?.errors, null, 2),
   );
 
   return productValidationResult;

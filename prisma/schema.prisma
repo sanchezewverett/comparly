@@ -42,7 +42,7 @@ model ProductDetails {
   name             String
   internalCategory String
   description      String
-  price            Decimal @db.Decimal(10, 2)
+  price            Int
   currency         String  @db.VarChar(3)
   productUrl       String
   imageUrl         String?

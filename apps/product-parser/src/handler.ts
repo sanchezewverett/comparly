@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-import { parseFeedFile } from "./parser";
+import { PrismaClient } from '@prisma/client';
+import { parseFeedFile } from './parser';
 
 const prisma = new PrismaClient();
 const twelveHoursAgo = new Date(Date.now() - 12 * 60 * 60 * 1000);
@@ -15,16 +15,13 @@ export const handler = async () => {
     const clients = await prisma.client.findMany({
       where: {
         active: true,
-        OR: [
-          { lastFeedProcessedAt: null },
-          { lastFeedProcessedAt: { lt: twelveHoursAgo } },
-        ],
+        OR: [{ lastFeedProcessedAt: null }, { lastFeedProcessedAt: { lt: twelveHoursAgo } }],
       },
-      orderBy: { id: "asc" },
+      orderBy: { id: 'asc' },
     });
 
     if (clients.length === 0) {
-      console.info("No active clients to process");
+      console.info('No active clients to process');
       return;
     }
 
@@ -43,7 +40,7 @@ export const handler = async () => {
         if (!products || !products.success) {
           errors.push({
             clientId: client.id,
-            error: "No products to process",
+            error: 'No products to process',
           });
           return;
         }
@@ -52,13 +49,13 @@ export const handler = async () => {
           products.data.map(async (product) => {
             try {
               const internalProduct = await prisma.product.upsert({
-                where: { externalId: product.id },
+                where: { externalId: product.gtin || product.mpn },
                 update: {
                   googleCategoryId: product.googleProductCategory
                     ? Number(product.googleProductCategory)
                     : undefined,
                   brand: product.brand,
-                  externalId: product.id,
+                  externalId: product.gtin || product.mpn,
                   updatedAt: new Date(),
                 },
                 create: {
@@ -66,7 +63,7 @@ export const handler = async () => {
                     ? Number(product.googleProductCategory)
                     : undefined,
                   brand: product.brand,
-                  externalId: product.id,
+                  externalId: product.gtin || product.mpn!,
                   createdAt: new Date(),
                   updatedAt: new Date(),
                 },
@@ -116,7 +113,7 @@ export const handler = async () => {
                 error: err instanceof Error ? err.message : String(err),
               });
             }
-          })
+          }),
         );
 
         try {
@@ -130,15 +127,14 @@ export const handler = async () => {
             error: `update lastFeedProcessedAt: ${err}`,
           });
         }
-      })
+      }),
     );
   } catch (error: any) {
     errors.push({ error: error.message });
   } finally {
     await prisma.$disconnect();
     if (errors.length > 0) {
-      const grouped: Record<number, { productId?: string; error: string }[]> =
-        {};
+      const grouped: Record<number, { productId?: string; error: string }[]> = {};
       errors.forEach((err) => {
         const clientId = err.clientId ?? -1;
         if (!grouped[clientId]) grouped[clientId] = [];
@@ -149,10 +145,9 @@ export const handler = async () => {
       });
 
       Object.entries(grouped).forEach(([clientId, errs]) => {
-        console.error(
-          `Errors for client ${clientId}: ${errs.length} products failed.`,
-          { errors: errs }
-        );
+        console.error(`Errors for client ${clientId}: ${errs.length} products failed.`, {
+          errors: errs,
+        });
       });
     } else {
       console.info(`Import finished. Processed products: ${totalProducts}`);
