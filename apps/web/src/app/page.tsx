@@ -58,14 +58,16 @@ export default function HomePage() {
           ) : data ? (
             <>
               <ProductList products={data.data} />
-              <Stack mt={4} direction="row" justifyContent="center">
-                <Pagination
-                  count={data?.totalPages}
-                  page={data?.page}
-                  onChange={handleChangePage}
-                  color="primary"
-                />
-              </Stack>
+              {data.totalPages > 1 ? (
+                <Stack mt="auto" pt={4} direction="row" justifyContent="center">
+                  <Pagination
+                    count={data?.totalPages}
+                    page={data?.page}
+                    onChange={handleChangePage}
+                    color="primary"
+                  />
+                </Stack>
+              ) : null}
             </>
           ) : null}
         </Stack>
