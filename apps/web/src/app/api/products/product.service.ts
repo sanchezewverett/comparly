@@ -1,5 +1,5 @@
-import { getProducts, getProductById } from "./product.repository";
-import { GetProductsQuery } from "./product.schema";
+import { getProducts, getProductById } from './product.repository';
+import { GetProductsQuery } from './product.schema';
 
 export const getPaginatedProducts = async ({
   page,
@@ -23,6 +23,6 @@ export const getPaginatedProducts = async ({
 
 export const fetchProductDetails = async (id: number) => {
   const product = await getProductById(id);
-  if (!product) throw new Error("Product not found");
+  if (!product) throw new Error('Product not found');
   return product;
 };

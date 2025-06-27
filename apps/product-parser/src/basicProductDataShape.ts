@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const structuredTitleDescription = (message: string) =>
   z.object({
@@ -10,31 +10,26 @@ export const basicProductDataShape = z.object({
   id: z.union([z.string(), z.number()]).transform((val) => String(val)),
   title: z
     .string()
-    .nonempty("Title must be at least 1 character.")
-    .max(150, "Title must be at most 50 characters.")
-    .or(structuredTitleDescription("Title must be at least 1 character.")),
+    .nonempty('Title must be at least 1 character.')
+    .max(150, 'Title must be at most 50 characters.')
+    .or(structuredTitleDescription('Title must be at least 1 character.')),
   description: z
     .string()
-    .max(100000, "Description must be at most 5000 characters.")
-    .transform((val) => (val && val.trim() !== "" ? val : "Brak opisu"))
-    .or(
-      structuredTitleDescription("Description must be at least 1 character.")
-    ),
+    .max(100000, 'Description must be at most 5000 characters.')
+    .transform((val) => (val && val.trim() !== '' ? val : 'Brak opisu'))
+    .or(structuredTitleDescription('Description must be at least 1 character.')),
   link: z.string().url(),
   image_link: z.string().url(),
 });
 
-export const basicProductDataTransform = <
-  T extends z.infer<typeof basicProductDataShape>
->({
+export const basicProductDataTransform = <T extends z.infer<typeof basicProductDataShape>>({
   title,
   description,
   image_link,
   ...rest
 }: T) => ({
   imageLink: image_link,
-  title: typeof title === "string" ? title : title.content,
-  description:
-    typeof description === "string" ? description : description.content,
+  title: typeof title === 'string' ? title : title.content,
+  description: typeof description === 'string' ? description : description.content,
   ...rest,
 });
