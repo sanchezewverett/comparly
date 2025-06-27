@@ -1,7 +1,16 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { Container, Box, Typography, Card, CardMedia, CardContent, Button, CircularProgress } from '@mui/material';
+import {
+  Container,
+  Box,
+  Typography,
+  Card,
+  CardMedia,
+  CardContent,
+  Button,
+  CircularProgress,
+} from '@mui/material';
 import { useProduct } from '@/hooks/useProduct';
 
 export default function ProductPage() {
@@ -11,7 +20,9 @@ export default function ProductPage() {
   if (isLoading) {
     return (
       <Container maxWidth="md" sx={{ py: 6 }}>
-        <Box display="flex" justifyContent="center"><CircularProgress /></Box>
+        <Box display="flex" justifyContent="center">
+          <CircularProgress />
+        </Box>
       </Container>
     );
   }
@@ -41,7 +52,7 @@ export default function ProductPage() {
             {product.category?.name}
           </Typography>
           <Typography variant="h6" color="primary" gutterBottom>
-            Cena: {Number(product.price / 100)} {product.currency}
+            Cena: {Number(product.price / 100).toFixed(2)} {product.currency}
           </Typography>
           <Typography variant="body1" sx={{ my: 2 }}>
             {product.description || 'Brak opisu produktu.'}

@@ -1,4 +1,4 @@
-import { ZodTypeAny, z } from "zod";
+import { ZodTypeAny, z } from 'zod';
 
 type ValidationSchemas = {
   params?: ZodTypeAny;
@@ -7,9 +7,9 @@ type ValidationSchemas = {
 };
 
 type InferredInput<S extends ValidationSchemas> = {
-  params: S["params"] extends ZodTypeAny ? z.infer<S["params"]> : undefined;
-  query: S["query"] extends ZodTypeAny ? z.infer<S["query"]> : undefined;
-  body: S["body"] extends ZodTypeAny ? z.infer<S["body"]> : undefined;
+  params: S['params'] extends ZodTypeAny ? z.infer<S['params']> : undefined;
+  query: S['query'] extends ZodTypeAny ? z.infer<S['query']> : undefined;
+  body: S['body'] extends ZodTypeAny ? z.infer<S['body']> : undefined;
 };
 
 export function withValidation<S extends ValidationSchemas>(
@@ -17,13 +17,10 @@ export function withValidation<S extends ValidationSchemas>(
   handler: (
     input: InferredInput<S>,
     req: Request,
-    context: { params: Promise<unknown> }
-  ) => Promise<Response>
+    context: { params: Promise<unknown> },
+  ) => Promise<Response>,
 ) {
-  return async function (
-    req: Request,
-    context: { params: Promise<unknown> }
-  ): Promise<Response> {
+  return async function (req: Request, context: { params: Promise<unknown> }): Promise<Response> {
     const errors: Record<string, unknown> = {};
     const result: Partial<InferredInput<S>> = {};
 
@@ -58,15 +55,12 @@ export function withValidation<S extends ValidationSchemas>(
           result.body = parsed.data;
         }
       } catch {
-        errors.body = { formErrors: ["Invalid JSON"], fieldErrors: {} };
+        errors.body = { formErrors: ['Invalid JSON'], fieldErrors: {} };
       }
     }
 
     if (Object.keys(errors).length > 0) {
-      return Response.json(
-        { error: "Validation error", issues: errors },
-        { status: 400 }
-      );
+      return Response.json({ error: 'Validation error', issues: errors }, { status: 400 });
     }
 
     return handler(result as InferredInput<S>, req, context);

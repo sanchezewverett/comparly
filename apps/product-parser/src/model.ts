@@ -1,20 +1,11 @@
-import { z } from "zod";
-import {
-  basicProductDataShape,
-  basicProductDataTransform,
-} from "./basicProductDataShape";
+import { z } from 'zod';
+import { basicProductDataShape, basicProductDataTransform } from './basicProductDataShape';
 import {
   priceAndAvailabilityShape,
   priceAndAvailabilityTransform,
-} from "./priceAndAvailabilityShape";
-import {
-  productCategoryShape,
-  productCategoryTransform,
-} from "./productCategoryShape";
-import {
-  productIdentifierRefinement,
-  productIdentifiersShape,
-} from "./productIdentifiersShape";
+} from './priceAndAvailabilityShape';
+import { productCategoryShape, productCategoryTransform } from './productCategoryShape';
+import { productIdentifierRefinement, productIdentifiersShape } from './productIdentifiersShape';
 
 const productShape = basicProductDataShape
   .merge(priceAndAvailabilityShape)

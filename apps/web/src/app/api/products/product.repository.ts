@@ -1,5 +1,5 @@
-import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+import { prisma } from '@/lib/prisma';
+import { Prisma } from '@prisma/client';
 
 export const getProducts = async ({
   page,
@@ -20,8 +20,11 @@ export const getProducts = async ({
 }) => {
   const where: Prisma.ProductDetailsWhereInput = {};
 
+  console.log('-------');
+  console.log(name);
+  console.log('-------');
   if (name) {
-    where.name = { contains: name, mode: "insensitive" };
+    where.name = { contains: name, mode: 'insensitive' };
   }
 
   if (minPrice) {
@@ -34,7 +37,7 @@ export const getProducts = async ({
 
   if (brand) {
     where.product = {
-      brand: { contains: brand, mode: "insensitive" },
+      brand: { contains: brand, mode: 'insensitive' },
     };
   }
 
