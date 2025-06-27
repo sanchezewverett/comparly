@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Button, IconButton, Stack, TextField } from '@mui/material';
+import { Button, debounce, IconButton, Stack, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AppLogo from '@/components/AppLogo';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
@@ -17,19 +17,24 @@ const Header = () => {
   const isUpMedium = useMediaQuery(theme.breakpoints.up('md'));
   const isUpSmall = useMediaQuery(theme.breakpoints.up('sm'));
 
-  const handleSearch = () => {
-    const params = new URLSearchParams();
-    searchParams.forEach((value, key) => {
-      params.append(key, value);
-    });
-    params.set('name', query);
-    router.push(`/?${params.toString()}`);
-  };
+  const setParamsDebounced = useMemo(
+    () =>
+      debounce((productQuery: string) => {
+        const params = new URLSearchParams();
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      handleSearch();
-    }
+        searchParams.entries().forEach(([key, value]) => {
+          params.append(key, value);
+        });
+        params.set('name', productQuery);
+
+        router.push(`/?${params.toString()}`);
+      }, 800),
+    [searchParams, router],
+  );
+
+  const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.target.value);
+    setParamsDebounced(event.target.value);
   };
 
   const searchInputWidth = useMemo(() => {
@@ -63,20 +68,11 @@ const Header = () => {
           label="Wyszukaj produkt"
           size="small"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={handleKeyDown}
+          onChange={handleQueryChange}
           variant="outlined"
           fullWidth={!isUpSmall}
           sx={{ width: searchInputWidth }}
-          slotProps={{
-            input: {
-              endAdornment: (
-                <IconButton onClick={handleSearch} edge="end">
-                  <SearchIcon />
-                </IconButton>
-              ),
-            },
-          }}
+          slotProps={{ input: { endAdornment: <SearchIcon /> } }}
         />
         {isUpMedium ? (
           <Button
