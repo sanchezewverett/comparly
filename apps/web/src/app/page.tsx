@@ -49,7 +49,7 @@ export default function HomePage() {
   return (
     <Container maxWidth="xl" sx={{ py: 4, flexGrow: 1 }}>
       <Stack direction={isUpMedium ? 'row' : 'column'} spacing={4}>
-        <FilterList onFilterConfirm={setFiltersState} />
+        <FilterList onFilterConfirm={() => {}} />
         <Stack width="100%">
           {isLoading ? (
             <Stack justifyContent="center" mt={4}>

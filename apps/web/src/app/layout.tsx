@@ -4,6 +4,8 @@ import { CssBaseline } from '@mui/material';
 import ReactQueryProvider from '@/providers/ReactQueryProvider';
 import App from '@/app/App';
 import React, { Suspense } from 'react';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
 
 export const metadata: Metadata = {
   title: 'Comparly - Comparison Shopping Service',
@@ -19,6 +21,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <ReactQueryProvider>
           <AppRouterCacheProvider>
             <Suspense fallback={null}>
+              <ReactQueryDevtools initialIsOpen={false} />
               <App>{children}</App>
             </Suspense>
           </AppRouterCacheProvider>
