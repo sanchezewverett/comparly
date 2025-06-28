@@ -13,16 +13,12 @@ import {
 } from '@mui/material';
 import { useFilters } from '@/hooks/useFilters';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { FilterFromState } from '@/app/model';
 import { useMediaQuery, useTheme } from '@mui/system';
 import CategoriesNestingMenu from '@/components/filter/CategoriesNestingMenu';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-type Props = {
-  onFilterConfirm: (formState: FilterFromState) => void;
-};
 
-const FilterList: FC<Props> = ({ onFilterConfirm }) => {
+const FilterList: FC = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const theme = useTheme();
@@ -41,13 +37,11 @@ const FilterList: FC<Props> = ({ onFilterConfirm }) => {
 
   const handleFilter = (e: React.FormEvent) => {
     e.preventDefault();
-    onFilterConfirm(formState);
     const params = new URLSearchParams();
     params.set('page', '1');
     Object.entries(formState).forEach(([key, value]) => {
       if (value) params.set(key, value);
     });
-
     router.push(`/?${params.toString()}`);
   };
 

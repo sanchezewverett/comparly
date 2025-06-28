@@ -15,8 +15,7 @@ const parseSearchParams = (searchParams: ReadonlyURLSearchParams) => ({
   category: searchParams.get('category') || '',
   brand: searchParams.get('brand') || '',
   minPrice: searchParams.get('minPrice') || '',
-  maxPrice: searchParams.get('maxPrice') || '',
-  query: searchParams.get('query') || '',
+  maxPrice: searchParams.get('maxPrice') || ''
 });
 
 export default function HomePage() {
@@ -49,7 +48,7 @@ export default function HomePage() {
   return (
     <Container maxWidth="xl" sx={{ py: 4, flexGrow: 1 }}>
       <Stack direction={isUpMedium ? 'row' : 'column'} spacing={4}>
-        <FilterList onFilterConfirm={setFiltersState} />
+        <FilterList />
         <Stack width="100%">
           {isLoading ? (
             <Stack justifyContent="center" mt={4}>
@@ -58,14 +57,16 @@ export default function HomePage() {
           ) : data ? (
             <>
               <ProductList products={data.data} />
-              <Stack mt={4} direction="row" justifyContent="center">
-                <Pagination
-                  count={data?.totalPages}
-                  page={data?.page}
-                  onChange={handleChangePage}
-                  color="primary"
-                />
-              </Stack>
+              {data.totalPages > 1 ? (
+                <Stack mt="auto" pt={4} direction="row" justifyContent="center">
+                  <Pagination
+                    count={data?.totalPages}
+                    page={data?.page}
+                    onChange={handleChangePage}
+                    color="primary"
+                  />
+                </Stack>
+              ) : null}
             </>
           ) : null}
         </Stack>

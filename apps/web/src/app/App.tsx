@@ -4,6 +4,7 @@ import React, { FC, Suspense } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { CircularProgress, CssBaseline } from '@mui/material';
 
 const theme = createTheme({
   palette: {
@@ -25,8 +26,9 @@ type Props = {
 const App: FC<Props> = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Header />
-      <Suspense fallback={<div>Ładowanie...</div>}>{children}</Suspense>
+      <Suspense fallback={<CircularProgress />}>{children}</Suspense>
       <Footer />
     </ThemeProvider>
   );

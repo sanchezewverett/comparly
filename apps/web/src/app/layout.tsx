@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
-import { CssBaseline } from '@mui/material';
 import ReactQueryProvider from '@/providers/ReactQueryProvider';
 import App from '@/app/App';
-import React, { Suspense } from 'react';
+import React from 'react';
+
 
 export const metadata: Metadata = {
   title: 'Comparly - Comparison Shopping Service',
@@ -15,12 +15,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-        <CssBaseline />
         <ReactQueryProvider>
           <AppRouterCacheProvider>
-            <Suspense fallback={null}>
               <App>{children}</App>
-            </Suspense>
           </AppRouterCacheProvider>
         </ReactQueryProvider>
       </body>

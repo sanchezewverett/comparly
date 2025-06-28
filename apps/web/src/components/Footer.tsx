@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { grey } from '@mui/material/colors';
-import { Divider, Link, Stack } from '@mui/material';
+import { Box, Divider, Link, Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import EmailIcon from '@mui/icons-material/Email';
 import { useMediaQuery, useTheme } from '@mui/system';
@@ -10,8 +10,6 @@ import HiddenButton from '@/components/HiddenButton';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { GENERAL_QUESTION_URL, LICENSE_QUESTION_URL } from '@/constant';
 import BusinessIcon from '@mui/icons-material/Business';
-import LocationCityIcon from '@mui/icons-material/LocationCity';
-import SignpostIcon from '@mui/icons-material/Signpost';
 
 const Footer = () => {
   const theme = useTheme();
@@ -43,7 +41,7 @@ const Footer = () => {
               Info
             </Typography>
             <Stack direction="column" alignItems="start" spacing={2}>
-              <Link component="button" variant="body2" color="textPrimary" underline="hover">
+              <Link href="/" variant="body2" color="textPrimary" underline="hover">
                 Home
               </Link>
               <Link
@@ -55,9 +53,6 @@ const Footer = () => {
               >
                 Dodaj swój sklep
               </Link>
-              <Link component="button" variant="body2" color="textPrimary" underline="hover">
-                O nas
-              </Link>
               <Link
                 target="_blank"
                 href={GENERAL_QUESTION_URL}
@@ -66,6 +61,9 @@ const Footer = () => {
                 underline="hover"
               >
                 Masz pytanie - napisz tutaj
+              </Link>
+              <Link component="button" variant="body2" color="textPrimary" underline="hover">
+                Polityka prywatnoci
               </Link>
             </Stack>
           </Stack>
@@ -84,15 +82,11 @@ const Footer = () => {
               </Stack>
               <Stack direction="row" spacing={1}>
                 <BusinessIcon fontSize="small" />
-                <Typography variant="body2">Movement Digital</Typography>
-              </Stack>
-              <Stack direction="row" spacing={1}>
-                <SignpostIcon fontSize="small" />
-                <Typography variant="body2">ul. Radosna 33</Typography>
-              </Stack>
-              <Stack direction="row" spacing={1}>
-                <LocationCityIcon fontSize="small" />
-                <Typography variant="body2">16-002, Nowe Aleksandrowo</Typography>
+                <Box variant="body2">
+                  <Typography variant="body2">Movement Digital</Typography>
+                  <Typography variant="body2">ul. Radosna 33</Typography>
+                  <Typography variant="body2">16-002, Nowe Aleksandrowo</Typography>
+                </Box>
               </Stack>
             </Stack>
           </Stack>
