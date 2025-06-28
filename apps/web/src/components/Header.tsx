@@ -12,7 +12,7 @@ import { LICENSE_QUESTION_URL } from '@/constant';
 const Header = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [query, setQuery] = useState(searchParams.get('query') || '');
+  const [query, setQuery] = useState(searchParams.get('name') || '');
   const theme = useTheme();
   const isUpMedium = useMediaQuery(theme.breakpoints.up('md'));
   const isUpSmall = useMediaQuery(theme.breakpoints.up('sm'));

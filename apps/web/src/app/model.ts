@@ -4,7 +4,6 @@ export type FilterFromState = {
   maxPrice?: string;
   brand?: string;
   category?: string;
-  query?: string;
 };
 
 export type CategoryNode = {
